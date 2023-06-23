@@ -231,10 +231,10 @@ Our goal here is to recreate [Figure 18.5](https://dtkaplan.github.io/DataComput
 
 ```{r}
 ### My code here
-
+Trips %>%
+  inner_join(PairDistances, by = c('sstation', 'estation')) %>% ggplot(aes(x = distance)) + geom_density(color = 'blue') + geom_density(data=PairDistances,alpha = 0.2,color = NA,fill='red') + xlab('Trip Distance (km)') + xlim(0,15) + theme_linedraw()
 ```
-
-
+The graphs for the distribution of ride distances compared to pairwise differences of stations is similar. We observe that the density for ride distances is mostly centered around 1-3km, while pairwise distance between stations is spread across 0-15km. 
 
 
 #### Extra Credit: Joining and Variable Names in R
@@ -243,7 +243,7 @@ Look at the variables in `Stations` and `Trips` and explain why `Simple` and `Si
 
 Optional Extra credit answer here.....
 
-
+We need duplicate data with different table names so that we can calculate the latitude and longitude distances with haversine(). We need two pairs of (lat,long) to do a distance calculation. 
 
 
 
