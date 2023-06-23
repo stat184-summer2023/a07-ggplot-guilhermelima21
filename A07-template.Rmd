@@ -156,11 +156,23 @@ Group the bike rentals by three variables: hour of the day, day of the week, and
 
 ```{r}
 ### My Code here
+Trips %>% mutate(hour = lubridate::hour(sdate), weekday = lubridate::wday(sdate)) %>% group_by(hour,weekday,client) %>% summarise(totalEvents = n()) %>% ggplot() +
+  aes(
+    x = hour,
+    y = totalEvents,
+    colour = weekday,
+    group = weekday
+  ) +
+  geom_point(shape = "circle", size = 1.5) +
+  scale_color_viridis_c(option = "plasma", direction = 1) +
+  theme_linedraw() +
+  facet_wrap(vars(client)) + labs(x="Hour of Day", y= "Total Number of Events")
 
 ```
 
 My comments here.....
 
+We notice that casual clients check out bikes less frequently than registered clients. Registerd clients have a much higher spike in bikes checked out during ~8am and ~4-6pm. From the weekday grouping, we can observe that casual clients rent bikes more frequently on the Sunday since the yellow dots are on top of the rest, while registered clients rent them on a mix of weekdays.
 
 ## Question 4: How Far? 
 
