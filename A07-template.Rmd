@@ -1,7 +1,7 @@
 ---
 title: "A07- ggplot"
-author: "YOUR NAME"
-date: "DATE"
+author: "Guilherme Lima"
+date: "06/23/23"
 output: html_notebook
 ---
 
@@ -69,7 +69,7 @@ When you make your plot, you will likely find that the axis range is being set b
 
 ```{r}
 ### Your code here
-
+Trips %>% ggplot(aes(x=client, y=(as.numeric(edate - sdate)/60))) + geom_boxplot() + ylim(0,60) +labs(y="dur/60") + theme_linedraw()
 
 ```
 
@@ -103,47 +103,52 @@ You can use [Figure 18.3](https://dtkaplan.github.io/DataComputingEbook/project-
 
 ```{r}
 ### Your Code Here
-
+Trips %>% ggplot(aes(x= lubridate::yday(sdate))) + geom_density(fill = "gray") + labs(x="Day of Year", y= "density") + theme_linedraw()
 ```
 
 
 My observations here..... 
 
+Bikes were checked out the most during October, waning in November, then a slight increase during December then dropping again.
 
 ### Day of Week
 
 ```{r}
 ### Your Code Here
-
+Trips %>% ggplot(aes(x= lubridate::wday(sdate))) + geom_density(fill = "gray") + labs(x="Day of Week", y= "density") + theme_linedraw()
 ```
 
 
 My observations here..... 
 
+Bikes were checked out in similar quantities throughout the week. The bikes are rented less at night, and Thursday & Friday are when bikes are used the most. 
 
 
 ### Hour of Day
 
 ```{r}
-### Your Code Here
+Trips %>% ggplot(aes(x= lubridate::hour(sdate))) + geom_density(fill = "gray") + labs(x="Hour of Day", y= "density") + theme_linedraw()
 
 ```
 
 
 My observations here..... 
 
+Bikes are checked out more frequently between 6am-9am, dropping around noontime, then frequently again during 3pm-8pm. The bikes are not checked out very frequently before 5am or after 8pm. 
 
 
 ### Minute of Hour
 
 ```{r}
-### Your Code Here
+Trips %>% ggplot(aes(x= lubridate::minute(sdate))) + geom_density(fill = "gray") + labs(x="Minute of Hour", y= "density") + theme_linedraw()
+
 
 ```
 
 
 My observations here..... 
 
+Bikes are rented frequently throughout the minute of the hour. Although there is a slight dip at 0min and 60min, looking at the y-axis indicates that the scale is very small and thus the dip is insignificant. 
 
 ## Question 3: Grouping
 
